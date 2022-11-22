@@ -16,13 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from gallery.views import AllGalleryApiList, DetailGalleryApiView, UserGalleryApiList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
+    path('auth/', include('djoser.urls')),
+    re_path('^auth/', include('djoser.urls.authtoken')),
+
     path('api/v1/gallery/', AllGalleryApiList.as_view()),
     path('api/v1/gallery/<int:user_id>/', UserGalleryApiList.as_view()),
     path('api/v1/gallery/<int:user_id>/<int:pk>/', DetailGalleryApiView.as_view()),
