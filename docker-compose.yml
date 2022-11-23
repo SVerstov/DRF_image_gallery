@@ -1,6 +1,13 @@
 version: '3.7'
 
 services:
+  postgresdrf:
+    restart: always
+    image: postgres:14.5-alpine
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
   django_gunicorn:
     volumes:
       - static:/static
@@ -18,6 +25,8 @@ services:
       - "80:80"
     depends_on:
       - django_gunicorn
+
+
 
 volumes:
   static:

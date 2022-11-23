@@ -14,8 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['*']
-ALLOWED_ORIGINS = ['http://*', 'https://*', '0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ALLOWED_ORIGINS.copy()
+CSRF_TRUSTED_ORIGINS = [os.getenv('SITE_DOMAIN'),'http://0.0.0.0']
 
 # Application definition
 
@@ -70,9 +69,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv('POSTGRES_DB'),
+        "USER": os.getenv('POSTGRES_USER'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
+        "HOST": "postgresdrf",  # set in docker-compose.yml
+        "PORT": 5432,  # default postgres port
     }
 }
 
