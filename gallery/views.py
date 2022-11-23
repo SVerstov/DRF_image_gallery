@@ -18,7 +18,7 @@ class AllGalleryApiList(generics.ListCreateAPIView, generics.DestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class QuerysetMixin:
+class GetQuerysetMixin:
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         if not user_id:
@@ -26,11 +26,11 @@ class QuerysetMixin:
         return GalleryImages.objects.filter(owner_id__exact=user_id)
 
 
-class UserGalleryApiList(QuerysetMixin, generics.ListCreateAPIView):
+class UserGalleryApiList(GetQuerysetMixin, generics.ListCreateAPIView):
     serializer_class = GallerySerializer
 
 
-class DetailGalleryApiView(QuerysetMixin, generics.RetrieveUpdateDestroyAPIView):
+class DetailGalleryApiView(GetQuerysetMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = GalleryImages.objects.all()
     serializer_class = GallerySerializer
     permission_classes = (IsOwnerOrReadOnly | IsAdminUser,)

@@ -27,8 +27,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    # 'rest_framework_simplejwt',
     'gallery',
+
 ]
 
 MIDDLEWARE = [
@@ -61,13 +61,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-#
-# REST_FRAMEWORK = {
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework.renderers.JSONRenderer',
-#         'rest_framework.renderers.TemplateHTMLRenderer',  # это строка отвечает за красивый рендер json в браузере
-#     ],
-# }
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
