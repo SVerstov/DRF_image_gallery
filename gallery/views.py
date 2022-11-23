@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 
 from gallery.models import GalleryImages
-from gallery.permissions import IsOwnerOrReadOnly, IsAdminUserOrReadOnly
+from gallery.permissions import IsOwnerOrReadOnly, IsAdminUserOrCantDestroy
 from gallery.serializers import GallerySerializer
 
 
@@ -11,7 +11,7 @@ from gallery.serializers import GallerySerializer
 class AllGalleryApiList(generics.ListCreateAPIView, generics.DestroyAPIView):
     queryset = GalleryImages.objects.all()
     serializer_class = GallerySerializer
-    permission_classes = (IsAdminUserOrReadOnly,)
+    permission_classes = (IsAdminUserOrCantDestroy, IsAuthenticatedOrReadOnly)
 
     def destroy(self, request, *args, **kwargs):
         GalleryImages.objects.all().delete()
@@ -28,6 +28,7 @@ class GetQuerysetMixin:
 
 class UserGalleryApiList(GetQuerysetMixin, generics.ListCreateAPIView):
     serializer_class = GallerySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
 class DetailGalleryApiView(GetQuerysetMixin, generics.RetrieveUpdateDestroyAPIView):

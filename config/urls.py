@@ -27,8 +27,8 @@ urlpatterns = [
     re_path('^auth/', include('djoser.urls.authtoken')),
 
     path('api/v1/gallery/', AllGalleryApiList.as_view(), name='all_gallery'),
-    path('api/v1/gallery/<int:user_id>/', UserGalleryApiList.as_view()),
-    path('api/v1/gallery/<int:user_id>/<int:pk>/', DetailGalleryApiView.as_view()),
+    path('api/v1/gallery/<int:user_id>/', UserGalleryApiList.as_view(), name='user_gallery'),
+    path('api/v1/gallery/<int:user_id>/<int:pk>/', DetailGalleryApiView.as_view(), name='one_image'),
 
 ]
 
