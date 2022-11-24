@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,10 +12,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv('DEBUG') == 'True'
-
+DEBUG = os.getenv('DEBUG') == True
+SITE_DOMAIN = os.getenv('SITE_DOMAIN')
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = [os.getenv('SITE_DOMAIN'),'http://0.0.0.0']
+CSRF_TRUSTED_ORIGINS = [os.getenv('SITE_DOMAIN'), 'http://0.0.0.0']
 
 # Application definition
 
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -63,7 +65,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -120,7 +121,7 @@ USE_TZ = True
 
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
-MEDIA_ROOT = Path(BASE_DIR, 'media/')
+MEDIA_ROOT = Path(BASE_DIR, '/media/')
 MEDIA_URL = '/media/'
 
 # Default primary key field type

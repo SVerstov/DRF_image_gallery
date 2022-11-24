@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework import serializers
 from .models import GalleryImages
 
@@ -12,3 +13,4 @@ class GallerySerializer(serializers.ModelSerializer):
 
     def get_owner_id(self, obj):
         return obj.owner.pk
+
