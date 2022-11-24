@@ -12,7 +12,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv('DEBUG') == True
+DEBUG = os.getenv('DEBUG')
+
 SITE_DOMAIN = os.getenv('SITE_DOMAIN')
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [os.getenv('SITE_DOMAIN'), 'http://0.0.0.0']
@@ -122,7 +123,7 @@ USE_TZ = True
 STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 MEDIA_ROOT = Path(BASE_DIR, '/media/')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
